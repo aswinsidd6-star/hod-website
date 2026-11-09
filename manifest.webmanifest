@@ -1,0 +1,15 @@
+{
+  "name": "HOD \u00b7 House of Durables",
+  "short_name": "HOD",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0b0c0f",
+  "theme_color": "#0b0c0f",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
