@@ -1,7 +1,11 @@
-HOD favicon replacement files
+HOD — Institutional favicon concept
 
-Upload favicon.ico, favicon-48.png, and apple-touch-icon.png to the ROOT of your deployed site,
-in the same location as index.html. Replace the existing files with these versions.
-These are generated from your supplied high-contrast icon-192.png artwork.
-Your index.html already contains the correct link tags; no duplicate tags are needed.
-After deployment, request re-indexing of https://www.houseofdurables.in/ in Google Search Console.
+Design direction: deep charcoal + warm ivory, using the supplied H monogram.
+No gradients, metallic effects, shadows, or decorative borders.
+
+To deploy: replace favicon.ico, favicon-48.png, and apple-touch-icon.png
+in the website root (same folder as index.html). The existing HTML already
+references these filenames. Commit to GitHub; Vercel should redeploy.
+
+This is a favicon concept. Review it at small sizes before treating it as
+the final brand mark.
