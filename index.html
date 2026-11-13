@@ -74,10 +74,12 @@ body.notes .note{display:block}
 .two .card h3{font-size:1.3rem}.two .card .btn{margin-top:20px;min-height:46px;font-size:1rem;padding:10px 20px}
 .sprint-h{margin-top:0}
 .wa{max-width:380px;margin:0 auto;text-align:left}
-.wa label{display:block;font:500 .68rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;margin:14px 0 6px}
-.wa input,.wa select,.wa textarea{width:100%;border:1.5px solid #111;border-radius:6px;background:#fff;color:#111;font:400 .9rem/1.3 var(--body);padding:11px 12px}
+.wa label{display:block;font:500 .75rem/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;margin:16px 0 6px}
+.wa input,.wa select,.wa textarea{width:100%;border:1.5px solid #111;border-radius:6px;background:#fff;color:#111;font:400 1rem/1.3 var(--body);padding:12px}
+.wa .bad{border-color:#b81d0b;box-shadow:0 0 0 1px #b81d0b}
+.wa-err{margin:0 0 4px;scroll-margin-top:16px;color:#a3190a;font:600 .92rem/1.35 var(--body)}
 .wa textarea{resize:vertical}
-.wa .btn{width:100%;margin-top:18px;cursor:pointer;border:0}
+.wa .btn{width:100%;justify-content:center;margin-top:18px;cursor:pointer;border:0}
 .wa a{color:#1a0dff}
 .ass{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;margin-top:14px;font-weight:600}.ass li{display:flex;gap:8px;align-items:baseline;font-size:.95rem;text-align:left}.ass li::before{content:"✓";font-weight:900}
 .herocta{margin-top:30px;display:flex;flex-wrap:wrap;gap:14px}
@@ -325,8 +327,8 @@ body.notes .note{display:block}
 .foot-n a:hover{color:var(--gold)}
 .foot-l{margin:36px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);font:500 .72rem/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#7d8189}
 @media(max-width:760px){.foot-g{grid-template-columns:1fr;gap:28px}}
-.wa-fab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:70;display:flex;align-items:center;gap:8px;background:var(--gold);color:#111;text-decoration:none;font:700 .9rem/1 var(--body);padding:14px 18px;border-radius:99px;box-shadow:0 10px 30px -8px rgba(0,0,0,.6),0 0 0 3px rgba(255,194,26,.25);opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .3s,transform .3s}
-.wa-fab.show{opacity:1;transform:none;pointer-events:auto}
+.wa-fab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:70;display:flex;align-items:center;gap:8px;background:var(--gold);color:#111;text-decoration:none;font:700 .9rem/1 var(--body);padding:14px 18px;border-radius:99px;box-shadow:0 10px 30px -8px rgba(0,0,0,.6),0 0 0 3px rgba(255,194,26,.25);opacity:0;transform:translateY(14px);pointer-events:none;visibility:hidden;transition:opacity .3s,transform .3s,visibility 0s .3s}
+.wa-fab.show{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition-delay:0s}
 .wa-fab svg{width:20px;height:20px;flex:none}
 @media(max-width:520px){.wa-fab{padding:14px}.wa-fab span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 @media(prefers-reduced-motion:reduce){.wa-fab{transition:none}}
@@ -650,35 +652,44 @@ window.addEventListener('scroll',onS,{passive:true});window.addEventListener('re
 <div class="head"><p class="eyebrow">Next step</p><h2>Tell us what’s slowing you down.</h2><p class="lead">Send a few lines. Your message opens in WhatsApp, a real person replies, and the diagnostic is free. No pitch deck, no pressure.</p>
 <p class="eyebrow" style="margin:26px 0 0">What you leave with</p><ul class="ass"><li>The one bottleneck, named in plain language</li><li>What to fix first, and why</li><li>Findings that are yours to keep, even if we never work together</li></ul></div>
 <div class="wa" id="waform" role="group" aria-label="WhatsApp enquiry form">
+<p class="wa-err" id="wa-err" role="alert" hidden></p>
 <label for="wa-want">I want to</label>
 <select id="wa-want"><option>Send a project enquiry</option><option>Find my bottleneck (free diagnostic)</option><option>Ask about the free premium website</option></select>
 <label for="wa-name">Your name</label>
-<input id="wa-name" type="text" autocomplete="name">
-<label for="wa-biz">Business</label>
+<input id="wa-name" type="text" autocomplete="name" required aria-describedby="wa-err">
+<label for="wa-biz">Business (optional)</label>
 <input id="wa-biz" type="text" autocomplete="organization">
 <label for="wa-msg">What’s slowing it down, or what do you need?</label>
-<textarea id="wa-msg" rows="4" placeholder="e.g. Enquiries come in, but we reply too late and lose them"></textarea>
-<button type="button" class="btn" id="wa-send">Send on WhatsApp →</button>
+<textarea id="wa-msg" rows="4" required aria-describedby="wa-err" placeholder="e.g. Enquiries come in, but we reply too late and lose them"></textarea>
+<a class="btn" id="wa-send" href="https://wa.me/916380824919" target="_blank" rel="noopener">Send on WhatsApp →</a>
 <p class="micro" style="text-align:center">Or WhatsApp us directly: <a href="https://wa.me/916380824919" target="_blank" rel="noopener">+91 63808 24919</a><br>Prefer email? <a href="mailto:houseofdurables@gmail.com">houseofdurables@gmail.com</a></p>
 </div>
 <p class="not"><b>Not for you if</b> you want overnight miracles or the cheapest option. <b>Perfect if</b> you want the real problem fixed properly.</p>
 </div></section>
 
 <script>
-document.getElementById('wa-send').addEventListener('click',function(){
-var v=function(id){return document.getElementById(id).value.trim()};
-var t='Hi, I want to: '+v('wa-want')+'\nName: '+v('wa-name')+'\nBusiness: '+v('wa-biz')+'\n\n'+v('wa-msg');
-window.open('https://wa.me/916380824919?text='+encodeURIComponent(t),'_blank','noopener');
-});
+(function(){
+var send=document.getElementById('wa-send'),err=document.getElementById('wa-err'),nm=document.getElementById('wa-name'),ms=document.getElementById('wa-msg');
+function v(id){return document.getElementById(id).value.trim()}
+function url(){var t='Hi, I want to: '+v('wa-want')+'\nName: '+v('wa-name');if(v('wa-biz'))t+='\nBusiness: '+v('wa-biz');return 'https://wa.me/916380824919?text='+encodeURIComponent(t+'\n\n'+v('wa-msg'))}
+['wa-want','wa-name','wa-biz','wa-msg'].forEach(function(id){var e=document.getElementById(id);e.addEventListener('input',function(){send.href=url();if(e.classList.contains('bad')&&e.value.trim()){e.classList.remove('bad');e.setAttribute('aria-invalid','false')}});e.addEventListener('change',function(){send.href=url()})});
+send.addEventListener('click',function(e){
+var bad=[nm,ms].filter(function(el){return !el.value.trim()});
+[nm,ms].forEach(function(el){var b=bad.indexOf(el)>-1;el.classList.toggle('bad',b);el.setAttribute('aria-invalid',b?'true':'false')});
+if(bad.length){e.preventDefault();err.textContent=bad.length===2?'Add your name and a line about what you need, then send.':bad[0]===nm?'Add your name so we know who to reply to.':'Add a line about what\u2019s slowing you down or what you need.';err.hidden=false;bad[0].focus({preventScroll:true});err.scrollIntoView({block:'start'});return}
+err.hidden=true;send.href=url()});
+})();
 document.querySelectorAll('[data-want]').forEach(function(a){a.addEventListener('click',function(){document.getElementById('wa-want').selectedIndex=+a.dataset.want;});});
 (function(){
 var bar=document.getElementById('ann');if(!bar)return;
-var m=bar.querySelectorAll('.ann-m'),dots=document.getElementById('ann-dots'),i=0,t=null,paused=false;
+var m=bar.querySelectorAll('.ann-m'),dots=document.getElementById('ann-dots'),i=0,t=null,paused=false,touched=false,rm=window.matchMedia('(prefers-reduced-motion: reduce)');
 Array.prototype.forEach.call(m,function(_,k){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Show offer '+(k+1));b.addEventListener('click',function(){show(k)});dots.appendChild(b)});
 function show(k){i=(k+m.length)%m.length;Array.prototype.forEach.call(m,function(e,j){e.classList.toggle('on',j===i)});Array.prototype.forEach.call(dots.children,function(e,j){e.classList.toggle('on',j===i)});reset()}
-function reset(){clearInterval(t);t=setInterval(function(){if(!paused)show(i+1)},5000)}
+function reset(){clearInterval(t);if(rm.matches||touched)return;t=setInterval(function(){if(!paused)show(i+1)},5000)}
 bar.addEventListener('mouseenter',function(){paused=true});bar.addEventListener('mouseleave',function(){paused=false});
 bar.addEventListener('focusin',function(){paused=true});bar.addEventListener('focusout',function(){paused=false});
+bar.addEventListener('touchstart',function(){touched=true;clearInterval(t)},{passive:true});
+if(rm.addEventListener)rm.addEventListener('change',reset);else if(rm.addListener)rm.addListener(reset);
 show(0);
 })();
 (function(){
@@ -722,12 +733,16 @@ pf.querySelectorAll('button[data-k]').forEach(function(b){b.addEventListener('cl
 reset.addEventListener('click',clear);
 cta.addEventListener('click',function(){var m=document.getElementById('wa-msg');if(m&&!m.value.trim())m.value='My problem: '+cta.dataset.problem+'.'});
 })();
-(function(){
-var f=document.getElementById('wa-fab'),book=document.getElementById('book');if(!f)return;
-var past=false,inBook=false;function upd(){f.classList.toggle('show',past&&!inBook)}
-window.addEventListener('scroll',function(){past=window.scrollY>700;upd()},{passive:true});
-if('IntersectionObserver' in window&&book){new IntersectionObserver(function(en){inBook=en[0].isIntersecting;upd()},{threshold:.15}).observe(book)}
-})();
+document.addEventListener('DOMContentLoaded',function(){
+var f=document.getElementById('wa-fab'),book=document.getElementById('book'),jr=document.getElementById('jr');if(!f)return;
+var past=false,inBook=false,inModel=false;
+function upd(){f.classList.toggle('show',past&&!inBook&&!inModel)}
+function onS(){past=window.scrollY>700;upd()}
+window.addEventListener('scroll',onS,{passive:true});onS();
+if('IntersectionObserver' in window){
+if(book)new IntersectionObserver(function(en){inBook=en[0].isIntersecting;upd()},{threshold:.15}).observe(book);
+if(jr)new IntersectionObserver(function(en){inModel=en[0].isIntersecting;upd()}).observe(jr)}
+});
 </script>
 
 
